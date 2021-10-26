@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../store/store';
 import {
   setFiltersData,
-  setIsAddNewHeroModalOpen,
+  // setIsAddNewHeroModalOpen,
   setIsHeroModalOpen,
 } from '../../../store/characters/charactersSlice';
 
@@ -58,8 +58,20 @@ const Characters: FC = () => {
         })
       );
     }
-  }, [searchTerm]);
-  
+  }, [searchTerm, selectFilters]);
+
+
+  // useEffect(() => {
+  //   const queryParams = new URLSearchParams(location.search);
+  //   const queryFilters = queryParams.get('filters');
+
+  //   if (queryFilters) {
+  //     const parseQueryFilters = JSON.parse(queryFilters) as IFiltersData;
+  //     console.log(parseQueryFilters);
+  //     dispatch(setFiltersData(parseQueryFilters));
+  //   }
+  // }, []);
+
 
   useEffect(() => {
     // if (state.filtersData.search !== '') {
@@ -87,8 +99,8 @@ const Characters: FC = () => {
 
   useEffect(() => {
     if (location.pathname === '/characters/new') {
-      dispatch(setIsAddNewHeroModalOpen(true));
-      alert('Новый');
+      // dispatch(setIsAddNewHeroModalOpen(true));
+      alert('Модалка с созданием персонажа');
     }
   }, []);
 

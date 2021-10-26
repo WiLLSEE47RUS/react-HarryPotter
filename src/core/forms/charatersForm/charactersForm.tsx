@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { InputComponent } from '../../../components/input/input.styled';
 import { Select } from '../../../components/Select/select';
 import { ISelect } from '../../../components/Select/select.type';
+import { AddButton } from '../../components/buttons/addBtn/addBtn';
 import { Form, SelectContainer } from './charactersForm.styled';
 import { ICharactersFormProps } from './charactersForm.type';
 
@@ -44,7 +45,10 @@ export const CharactersForm: FC<ICharactersFormProps> = (props) => {
           props.setSearchTerm(e.target.value);
         }}
       />
-      <SelectContainer>{...selects}</SelectContainer>
+      <SelectContainer>
+        {...selects}
+        <AddButton>Добавить</AddButton>
+      </SelectContainer>
     </Form>
   );
 };

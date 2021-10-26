@@ -3,7 +3,7 @@ import { characters } from '../../core/domain/creatures/creatures';
 
 import { ICreature } from '../../core/domain/creatures/creatures.type';
 
-interface IFiltersData {
+export interface IFiltersData {
   search: string;
   gender: string[];
   race: string[];
