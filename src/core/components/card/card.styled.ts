@@ -19,6 +19,7 @@ export const Wrapper = styled.div`
   width: 410px;
   height: 552px;
   animation: ${appear} 0.3s ease-in;
+  cursor: pointer;
 `;
 export const TitleContainer = styled.div<ITitleContainerProps>`
   height: 395px;

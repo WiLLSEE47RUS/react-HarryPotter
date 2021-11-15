@@ -1,12 +1,12 @@
 import { FC } from 'react';
-import { DictionaryTitles } from '../../../../core/forms/charatersForm/charactersForm';
+import { DictionaryTitles } from '../../../../core/forms/charatersFilterForm/charactersFilterForm.type';
 import { useAppSelector } from '../../../../store/store';
 import { Content } from './item.styled';
 import { IItemProps } from './item.type';
 
 export const Item: FC<IItemProps> = (props) => {
-  
-  const filters = useAppSelector(state => state.characters.filtersData);
+  const filters = useAppSelector((state) => state.characters.filtersData);
+
   const checkSelected = (title: string, id: string): boolean => {
     switch (title) {
       case DictionaryTitles.GENDER: {
@@ -23,11 +23,15 @@ export const Item: FC<IItemProps> = (props) => {
       }
     }
   };
-  
+
   return (
-    <Content onClick={(): void =>{props.handleSelect(props.title, props.id)}}>
+    <Content
+      onClick={(): void => {
+        props.handleSelect(props.title, props.id);
+      }}
+    >
       {/* eslint-disable-next-line jsx-a11y/label-has-for*/}
-      <label htmlFor={props.id.toString()} data-checked={checkSelected(props.title, props.id)}>
+      <label htmlFor={props.id} data-checked={checkSelected(props.title, props.id)}>
         <span>{props.option}</span>
       </label>
     </Content>

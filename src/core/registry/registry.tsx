@@ -8,11 +8,9 @@ import { useCharactersFetch } from '../../hooks/useCharactersFetch';
 import { useAppSelector } from '../../store/store';
 
 export const Registry: FC = () => {
-  // const itemsByPage = 3;
-  // const totalPages = Math.ceil(props.creatures.length / itemsByPage);
-  const totalPages = 3;
+
   const dots: ReactElement[] = [];
-  const { loading, error, currentPage, setCurrentPage } = useCharactersFetch();
+  const { loading, error, currentPage, setCurrentPage, totalPages } = useCharactersFetch();
 
   const state = useAppSelector((state) => state.characters);
   const creatures = state.registryState;

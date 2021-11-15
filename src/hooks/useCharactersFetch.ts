@@ -9,13 +9,14 @@ interface IFetchCharacters {
   error: boolean;
   currentPage: number;
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
+  totalPages: number;
 }
 
 export const useCharactersFetch = (): IFetchCharacters => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
-
+  const [totalPages, setTotalPages] = useState(0);
   const state = useAppSelector((state) => state.characters);
   const dispatch = useAppDispatch();
 
@@ -33,6 +34,10 @@ export const useCharactersFetch = (): IFetchCharacters => {
       );
       console.log(characters);
       dispatch(setRegistryState(characters.content));
+      setTotalPages(characters.totalPages);
+      if (currentPage > characters.totalPages) {
+        setCurrentPage(0);
+      }
     } catch (error) {
       setError(true);
     }
@@ -42,5 +47,5 @@ export const useCharactersFetch = (): IFetchCharacters => {
   useEffect(() => {
     void fetchCharacters();
   }, [currentPage, state.filtersData]);
-  return { loading, error, currentPage, setCurrentPage };
+  return { loading, error, currentPage, setCurrentPage, totalPages };
 };

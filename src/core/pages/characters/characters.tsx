@@ -4,16 +4,10 @@ import { useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../store/store';
 import { setIsHeroModalOpen } from '../../../store/characters/charactersSlice';
 
-import { CharactersForm } from '../../forms/charatersForm/charactersForm';
+import { CharactersFilterForm } from '../../forms/charatersFilterForm/charactersFilterForm';
 import { Registry } from '../../registry/registry';
 import { Content, Wrapper } from './characters.style';
 import { HeroModal } from '../../components/heroModal/heroModal';
-
-export interface ISelectFilters {
-  gender: string[];
-  race: string[];
-  side: string[];
-}
 
 const Characters: FC = () => {
   const state = useAppSelector((state) => state.characters);
@@ -29,18 +23,7 @@ const Characters: FC = () => {
     }
     console.log(path);
   }, [path]);
-
-  // useEffect(() => {
-  //   const queryParams = new URLSearchParams(location.search);
-  //   const queryFilters = queryParams.get('filters');
-
-  //   if (queryFilters) {
-  //     const parseQueryFilters = JSON.parse(queryFilters) as IFiltersData;
-  //     console.log(parseQueryFilters);
-  //     dispatch(setFiltersData(parseQueryFilters));
-  //   }
-  // }, []);
-
+  
   useEffect(() => {
     if (queryID) {
       dispatch(setIsHeroModalOpen(true));
@@ -50,7 +33,7 @@ const Characters: FC = () => {
   return (
     <Wrapper>
       <Content>
-        <CharactersForm />
+        <CharactersFilterForm />
         <Registry />
       </Content>
       {state.isHeroModalOpen && <HeroModal id={queryID} />}

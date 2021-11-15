@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { characters } from '../../core/domain/creatures/creatures';
 
 import { ICreature } from '../../core/domain/creatures/creatures.type';
 
@@ -18,7 +17,7 @@ interface ICharactersState {
 }
 
 const initialState: ICharactersState = {
-  registryState: characters,
+  registryState: [],
   isHeroModalOpen: false,
   isAddNewHeroModalOpen: false,
   filtersData: {
