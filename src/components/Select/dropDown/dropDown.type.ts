@@ -1,9 +1,7 @@
-import { SetStateAction } from 'react';
-import { ISelectFilters } from '../../../core/pages/characters/characters';
-import { IOptions } from '../select.type';
+import { ISelectDictionaryItem } from '../../../hooks/useDictionariesFetch';
 
 export interface IDropDownProps {
-  options: IOptions[];
-  handler: React.Dispatch<SetStateAction<ISelectFilters>>;
-  filterName: string;
+  title: string;
+  dictionary: ISelectDictionaryItem[];
+  handleSelect: (title: string, id: string) => void;
 }

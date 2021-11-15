@@ -3,7 +3,7 @@ import background from '../../../assets/bg_1.png';
 
 export const Wrapper = styled.main`
   background: url(${background}) center/cover no-repeat;
-  height: 980px;
+  min-height: calc(100vh - 100px);
   position: relative;
 `;
 

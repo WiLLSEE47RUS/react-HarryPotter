@@ -3,12 +3,12 @@ import styled from 'styled-components';
 import background from '../../../assets/bg.png';
 
 export const Wrapper = styled.div`
-  min-height: 980px;
+  height: calc(100vh - 100px);
   background: url(${background}) center/cover no-repeat;
   overflow: hidden;
 `;
 
 export const Content = styled.div`
-  margin: 123px auto 0;
+  margin: 53px auto 0;
   width: 1270px;
 `;

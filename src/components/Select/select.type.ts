@@ -1,16 +1,8 @@
-import { SetStateAction } from 'react';
-import { ISelectFilters } from '../../core/pages/characters/characters';
+import { ISelectDictionaryItem } from '../../hooks/useDictionariesFetch';
 
-export interface ISelect {
+export interface ISelectProps{
+  dictionary: ISelectDictionaryItem[];
   title: string;
-  options: IOptions[];
-}
-
-export interface ISelectProps extends ISelect{
-    setSelectFilters: React.Dispatch<SetStateAction<ISelectFilters>>;
-}
-
-export interface IOptions {
-  title: string;
-  checked: boolean;
+  countChecked: number;
+  handleSelect: (title: string, id: string) => void;
 }
