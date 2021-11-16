@@ -96,7 +96,6 @@ export const AddNewCharacterForm: FC = () => {
                     <label htmlFor="name">
                       Добавить имя {errors.name && <span className="error">{errors.name}</span>}
                     </label>
-
                     <input type="text" id="name" onChange={handleChange} onBlur={handleBlur} value={values.name} />
                   </AddName>
                   <AddParameters>

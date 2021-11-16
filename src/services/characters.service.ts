@@ -1,4 +1,5 @@
 
+import { CARD_LIST_SIZE } from '../config';
 import { IHero } from '../hooks/useHeroFetch';
 import { ISelectDictionaryItem } from '../store/characters/charactersSlice';
 import { ICharacterFetch } from './charactersFetch.type';
@@ -13,7 +14,7 @@ class API {
     race: string[],
     side: string[],
     page: number = 0,
-    size: number = 3
+    size: number = CARD_LIST_SIZE
   ): Promise<ICharacterFetch> {
     const valuesTerm: string = values.length ? values.map((el) => `values=${el}&`).join('') : '';
     const genderTerm: string = gender.length ? gender.map((el) => `gender=${el}&`).join('') : '';

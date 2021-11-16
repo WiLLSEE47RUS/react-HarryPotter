@@ -50,7 +50,7 @@ export const mapHeroToIHeroType = (
 ): IHero => {
   const getValueId = (dict:ISelectDictionaryItem[]): string =>{
     const id = dict.filter(el=> el.value === hero.gender || el.value === hero.race || el.value === hero.side)[0].id 
-    return id? id: `${Math.ceil(Math.random()*10000).toString()}`
+    return id? id: ''
   } 
 
   return {

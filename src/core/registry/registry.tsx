@@ -6,17 +6,19 @@ import { Card } from '../components/card/card';
 import { Wrapper, CardContent, ButtonContainer } from './registry.styled';
 import { useCharactersFetch } from '../../hooks/useCharactersFetch';
 import { useAppSelector } from '../../store/store';
+import { CARD_LIST_SIZE, MAX_CARDS, MAX_DOTS } from '../../config';
 
+// eslint-disable-next-line sonarjs/cognitive-complexity
 export const Registry: FC = () => {
-  const MAX_TOTAL_PAGES: number = 5;
-  const MAX_DOTS: number = 3;
+  const MAX_TOTAL_PAGES: number = Math.ceil(MAX_CARDS / CARD_LIST_SIZE);
   let dots: ReactElement[] = [];
+
   const { loading, error, currentPage, setCurrentPage, totalPages } = useCharactersFetch();
 
   const state = useAppSelector((state) => state.characters);
   const creatures = state.registryState;
-  // const dispatch = useAppDispatch();
   const cards = creatures.map((el, ind) => <Card key={ind} creature={el} />);
+
   for (let i = 0; i < totalPages; i++) {
     const dot: ReactElement = <DotButton index={i} handler={setCurrentPage} active={i === currentPage} key={i} />;
     dots.push(dot);
@@ -24,21 +26,17 @@ export const Registry: FC = () => {
       break;
     }
   }
+  
   if (totalPages > MAX_DOTS) {
-    switch (currentPage) {
-      case 0:
-      case 1: {
-        dots = dots.slice(0, 3);
-        break;
-      }
-      case 2: {
-        dots = dots.slice(1, 4);
-        break;
-      }
-      case 3: {
-        dots = dots.slice(totalPages === MAX_TOTAL_PAGES ? 2 : 1, 5);
-        break;
-      }
+    if (currentPage + 1 < MAX_DOTS) {
+      dots = dots.slice(
+        currentPage === 0 ? currentPage : currentPage - 1,
+        currentPage === 0 ? currentPage + CARD_LIST_SIZE : currentPage + CARD_LIST_SIZE - 1
+      );
+    }else if(currentPage+1>=MAX_DOTS && currentPage+1 <MAX_TOTAL_PAGES){
+      dots = dots.slice(currentPage-1, currentPage+2)
+    }else{
+      dots = dots.slice(MAX_TOTAL_PAGES-CARD_LIST_SIZE, MAX_TOTAL_PAGES)
     }
   }
 
