@@ -1,25 +1,20 @@
 import { useEffect, useState } from 'react';
 import API from '../services/characters.service';
-
-export interface ISelectDictionaryItem{
-    id: string;
-    value: string;
-}
+import { ISelectDictionaryItem, setGenderDictionary, setRaceDictionary, setSideDictionary } from '../store/characters/charactersSlice';
+import { useAppDispatch } from '../store/store';
 
 export interface IDictionaries {
-    loading: boolean;
-    error: boolean;
-    genderDictionary: ISelectDictionaryItem[];
-    sideDictionary: ISelectDictionaryItem[];
-    raceDictionary: ISelectDictionaryItem[];
+  loading: boolean;
+  error: boolean;
 }
 
 export const useDictionariesFetch = (): IDictionaries => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  const [genderDictionary, setGenderDictionary] = useState<ISelectDictionaryItem[]>([])
-  const [raceDictionary, setRaceDictionary] = useState<ISelectDictionaryItem[]>([])
-  const [sideDictionary, setSideDictionary] = useState<ISelectDictionaryItem[]>([])
+  // const [genderDictionary, setGenderDictionary] = useState<ISelectDictionaryItem[]>([])
+  // const [raceDictionary, setRaceDictionary] = useState<ISelectDictionaryItem[]>([])
+  // const [sideDictionary, setSideDictionary] = useState<ISelectDictionaryItem[]>([])
+  const dispatch = useAppDispatch();
   const fetchDictionaries = async (): Promise<void> => {
     try {
       setError(false);
@@ -28,11 +23,10 @@ export const useDictionariesFetch = (): IDictionaries => {
       const genders: ISelectDictionaryItem[] = await API.getGenderDictionary();
       const race: ISelectDictionaryItem[] = await API.getRaceDictionary();
       const side: ISelectDictionaryItem[] = await API.getSideDictionary();
-      
-      setGenderDictionary(genders);
-      setRaceDictionary(race);
-      setSideDictionary(side);
 
+      dispatch(setGenderDictionary(genders));
+      dispatch(setRaceDictionary(race));
+      dispatch(setSideDictionary(side));
     } catch (error) {
       setError(true);
     }
@@ -42,5 +36,5 @@ export const useDictionariesFetch = (): IDictionaries => {
   useEffect(() => {
     void fetchDictionaries();
   }, []);
-  return { loading, error, genderDictionary, raceDictionary, sideDictionary };
+  return { loading, error };
 };

@@ -1,15 +1,15 @@
 import styled from 'styled-components';
-import defaultDot from '../../../../assets/paginationbtns/defaultDot.png'
-import activeDot from '../../../../assets/paginationbtns/activeDot.png'
 
-interface IDotProps{
-    active: boolean
+interface IDotProps {
+  active: boolean;
+  type?: string;
 }
 
 export const Dot = styled.div<IDotProps>`
-cursor:pointer;
-height: 10px;
-width: 10px;
-margin: 0 42px;
-background: url(${(props):string => props.active? activeDot:defaultDot});
+  cursor: pointer;
+  height: ${(props):string => props.type === 'small'? '6px': '10px'};
+  width: ${(props):string => props.type === 'small'? '6px': '10px'};
+  border-radius: 50%;
+  margin:${(props):string => props.type === 'small'? '0 12px': '0 42px'};
+  background: ${(props): string => (props.active ? '#B09A81' : '#fff')};
 `;

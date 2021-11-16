@@ -1,6 +1,6 @@
-import { ISelectDictionaryItem } from '../../hooks/useDictionariesFetch';
+import { ISelectDictionaryItem } from '../../store/characters/charactersSlice';
 
-export interface ISelectProps{
+export interface ISelectProps {
   dictionary: ISelectDictionaryItem[];
   title: string;
   countChecked: number;

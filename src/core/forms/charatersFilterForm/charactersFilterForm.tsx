@@ -20,7 +20,7 @@ export const CharactersFilterForm: FC = () => {
   const state = useAppSelector((state) => state.characters);
   const dispatch = useAppDispatch();
 
-  const { loading: selectsLoading, error, genderDictionary, raceDictionary, sideDictionary } = useDictionariesFetch();
+  const { loading: selectsLoading, error } = useDictionariesFetch();
   //Передача параметров в URL
   useEffect(() => {
     if (!initialized) {
@@ -68,7 +68,7 @@ export const CharactersFilterForm: FC = () => {
   };
   // Обработка кнопки добавить
   const handleAddClick = (): void => {
-    history.push('character/new');
+    history.push('/characters/new');
   };
   // Вспомогательная функция для установки фильтров по селекту
   const setFiltered = (filter: string[], setFilter: React.Dispatch<SetStateAction<string[]>>, id: string): void => {
@@ -105,19 +105,19 @@ export const CharactersFilterForm: FC = () => {
       {!selectsLoading && !error && (
         <SelectContainer>
           <Select
-            dictionary={genderDictionary}
+            dictionary={state.genderDictionary}
             title={DictionaryTitles.GENDER}
             countChecked={state.filtersData.gender.length}
             handleSelect={handleSelectClick}
           />
           <Select
-            dictionary={raceDictionary}
+            dictionary={state.raceDictionary}
             title={DictionaryTitles.RACE}
             countChecked={state.filtersData.race.length}
             handleSelect={handleSelectClick}
           />
           <Select
-            dictionary={sideDictionary}
+            dictionary={state.sideDictionary}
             title={DictionaryTitles.SIDE}
             countChecked={state.filtersData.side.length}
             handleSelect={handleSelectClick}

@@ -9,11 +9,14 @@ export const Card: FC<ICardProps> = (props) => {
   return (
     <Wrapper
       onClick={(): void => {
-        history.push(`/characters/${props.creature.id}`);
+          if(props.type !== 'small'){
+            history.push(`/characters/${props.creature.id}`)
+          } 
       }}
+      type = {props.type}
     >
       <TitleContainer img={props.creature.imageURL}>
-        <Title color={props.creature.nameColor}>{props.creature.name}</Title>
+        <Title color={props.creature.nameColor}  type = {props.type}>{props.creature.name}</Title>
       </TitleContainer>
       <CardDescription
         backgroundColor={props.creature.backgroundColor}
@@ -21,6 +24,7 @@ export const Card: FC<ICardProps> = (props) => {
         gender={props.creature.gender}
         race={props.creature.race}
         side={props.creature.side}
+        type = {props.type}
       />
     </Wrapper>
   );

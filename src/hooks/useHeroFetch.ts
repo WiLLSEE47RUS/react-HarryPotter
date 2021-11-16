@@ -3,7 +3,7 @@ import { IHeroFilter } from '../core/components/heroModal/heroModal.type';
 import API from '../services/characters.service';
 
 export interface IHero {
-  id: string;
+  id?: string;
   name: string;
   description: string;
   imageURL: string;
@@ -24,7 +24,7 @@ interface ICharacterFetch {
   error: boolean;
 }
 
-const initialState = {
+const initialState:IHero = {
   id: '',
   name: '',
   description: '',

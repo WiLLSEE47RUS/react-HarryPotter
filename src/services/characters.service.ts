@@ -1,5 +1,6 @@
-import { ISelectDictionaryItem } from '../hooks/useDictionariesFetch';
+
 import { IHero } from '../hooks/useHeroFetch';
+import { ISelectDictionaryItem } from '../store/characters/charactersSlice';
 import { ICharacterFetch } from './charactersFetch.type';
 
 class API {
@@ -12,7 +13,6 @@ class API {
     race: string[],
     side: string[],
     page: number = 0,
-    // eslint-disable-next-line @typescript-eslint/no-magic-numbers
     size: number = 3
   ): Promise<ICharacterFetch> {
     const valuesTerm: string = values.length ? values.map((el) => `values=${el}&`).join('') : '';
@@ -22,24 +22,35 @@ class API {
     const endpoint =
       this.location +
       `character?${valuesTerm}${genderTerm}${raceTerm}${sideTerm}sort=createdDate,ASC&page=${page}&size=${size}`;
-    return await (await fetch(endpoint)).json() as ICharacterFetch;
+    return (await (await fetch(endpoint)).json()) as ICharacterFetch;
   }
   async getGenderDictionary(): Promise<ISelectDictionaryItem[]> {
     const endpoint = this.location + 'gender';
-    return await (await fetch(endpoint)).json() as ISelectDictionaryItem[];
+    return (await (await fetch(endpoint)).json()) as ISelectDictionaryItem[];
   }
   async getRaceDictionary(): Promise<ISelectDictionaryItem[]> {
     const endpoint = this.location + 'race';
-    return await (await fetch(endpoint)).json() as ISelectDictionaryItem[];
+    return (await (await fetch(endpoint)).json()) as ISelectDictionaryItem[];
   }
   async getSideDictionary(): Promise<ISelectDictionaryItem[]> {
     const endpoint = this.location + 'side';
-    return await (await fetch(endpoint)).json() as ISelectDictionaryItem[];
+    return (await (await fetch(endpoint)).json()) as ISelectDictionaryItem[];
   }
-  
+
   async getCharacterInfo(id: string): Promise<IHero> {
     const endpoint = this.location + 'character/' + id;
-    return (await fetch(endpoint).then((res) => res.json())) as IHero;
+    return (await (await fetch(endpoint)).json()) as IHero;
+  }
+  async postCharacter(data: Omit<IHero, 'id'>): Promise<string> {
+    const endpoint = this.location + 'character';
+    const response = await fetch(endpoint, {
+      method: 'POST', // *GET, POST, PUT, DELETE, etc.
+      headers: {
+        'content-Type': 'application/json',
+      },
+      body: JSON.stringify(data), // body data type must match "Content-Type" header
+    });
+    return (await response.json()) as string; // parses JSON response into native JavaScript objects
   }
 }
 export default new API();

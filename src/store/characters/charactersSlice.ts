@@ -8,11 +8,18 @@ export interface IFiltersData {
   race: string[];
   side: string[];
 }
+export interface ISelectDictionaryItem {
+  id: string;
+  value: string;
+}
 
 interface ICharactersState {
   registryState: ICreature[];
   isHeroModalOpen: boolean;
   isAddNewHeroModalOpen: boolean;
+  genderDictionary: ISelectDictionaryItem[];
+  raceDictionary: ISelectDictionaryItem[];
+  sideDictionary: ISelectDictionaryItem[];
   filtersData: IFiltersData;
 }
 
@@ -20,6 +27,9 @@ const initialState: ICharactersState = {
   registryState: [],
   isHeroModalOpen: false,
   isAddNewHeroModalOpen: false,
+  genderDictionary: [],
+  raceDictionary: [],
+  sideDictionary: [],
   filtersData: {
     search: '',
     gender: [],
@@ -43,6 +53,16 @@ export const charactersSlice = createSlice({
     setIsAddNewHeroModalOpen: (state, action: PayloadAction<boolean>) => {
       state.isAddNewHeroModalOpen = action.payload;
     },
+    setGenderDictionary: (state, action: PayloadAction<ISelectDictionaryItem[]>) =>{
+      state.genderDictionary = action.payload;
+    },
+    setRaceDictionary: (state, action: PayloadAction<ISelectDictionaryItem[]>) =>{
+      state.raceDictionary = action.payload;
+    },
+    setSideDictionary: (state, action: PayloadAction<ISelectDictionaryItem[]>) =>{
+      state.sideDictionary = action.payload;
+    }
   },
 });
-export const { setRegistryState, setFiltersData, setIsHeroModalOpen, setIsAddNewHeroModalOpen } = charactersSlice.actions;
+export const { setRegistryState, setFiltersData, setIsHeroModalOpen, setIsAddNewHeroModalOpen, setGenderDictionary, setRaceDictionary, setSideDictionary } =
+  charactersSlice.actions;

@@ -45,7 +45,9 @@ export const useCharactersFetch = (): IFetchCharacters => {
   };
 
   useEffect(() => {
-    void fetchCharacters();
+    if (!state.isHeroModalOpen && !state.isAddNewHeroModalOpen) {
+      void fetchCharacters();
+    }
   }, [currentPage, state.filtersData]);
   return { loading, error, currentPage, setCurrentPage, totalPages };
 };

@@ -13,6 +13,7 @@ export const ArrowButton: FC<IArrowBtnProps> = (props) => {
           props.handler((prev) => (prev === 0 ? props.totalPages - 1 : prev - 1));
         }
       }}
+      type = {props.type}
     />
   );
 };

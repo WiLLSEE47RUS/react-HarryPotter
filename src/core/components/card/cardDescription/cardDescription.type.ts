@@ -4,4 +4,5 @@ export interface ICardDescription {
   gender: string;
   race: string;
   side: string;
+  type?: string;
 }

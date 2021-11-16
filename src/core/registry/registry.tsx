@@ -8,8 +8,9 @@ import { useCharactersFetch } from '../../hooks/useCharactersFetch';
 import { useAppSelector } from '../../store/store';
 
 export const Registry: FC = () => {
-
-  const dots: ReactElement[] = [];
+  const MAX_TOTAL_PAGES: number = 5;
+  const MAX_DOTS: number = 3;
+  let dots: ReactElement[] = [];
   const { loading, error, currentPage, setCurrentPage, totalPages } = useCharactersFetch();
 
   const state = useAppSelector((state) => state.characters);
@@ -19,6 +20,26 @@ export const Registry: FC = () => {
   for (let i = 0; i < totalPages; i++) {
     const dot: ReactElement = <DotButton index={i} handler={setCurrentPage} active={i === currentPage} key={i} />;
     dots.push(dot);
+    if (i === MAX_TOTAL_PAGES - 1) {
+      break;
+    }
+  }
+  if (totalPages > MAX_DOTS) {
+    switch (currentPage) {
+      case 0:
+      case 1: {
+        dots = dots.slice(0, 3);
+        break;
+      }
+      case 2: {
+        dots = dots.slice(1, 4);
+        break;
+      }
+      case 3: {
+        dots = dots.slice(totalPages === MAX_TOTAL_PAGES ? 2 : 1, 5);
+        break;
+      }
+    }
   }
 
   if (error) {

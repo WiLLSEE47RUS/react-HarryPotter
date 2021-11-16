@@ -10,7 +10,7 @@
 //     textColor?: string
 // }
 export interface ICreature {
-  id: string;
+  id?: string;
   name: string;
   imageURL: string;
   nameColor: string;

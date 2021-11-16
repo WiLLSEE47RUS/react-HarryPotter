@@ -1,4 +1,4 @@
-import { ISelectDictionaryItem } from '../../../hooks/useDictionariesFetch';
+import { ISelectDictionaryItem } from '../../../store/characters/charactersSlice';
 
 export interface IDropDownProps {
   title: string;

@@ -2,10 +2,11 @@ import { FC, useEffect } from 'react';
 
 import { useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../store/store';
-import { setIsHeroModalOpen } from '../../../store/characters/charactersSlice';
+import { setIsAddNewHeroModalOpen, setIsHeroModalOpen } from '../../../store/characters/charactersSlice';
 
 import { CharactersFilterForm } from '../../forms/charatersFilterForm/charactersFilterForm';
 import { Registry } from '../../registry/registry';
+import { AddNewCharacterForm } from '../../forms/addNewCharacterForm/addNewCharacterForm'
 import { Content, Wrapper } from './characters.style';
 import { HeroModal } from '../../components/heroModal/heroModal';
 
@@ -18,8 +19,7 @@ const Characters: FC = () => {
 
   useEffect(() => {
     if (path === '/characters/new') {
-      // dispatch(setIsAddNewHeroModalOpen(true));
-      alert('Модалка с созданием персонажа');
+      dispatch(setIsAddNewHeroModalOpen(true));
     }
     console.log(path);
   }, [path]);
@@ -37,6 +37,7 @@ const Characters: FC = () => {
         <Registry />
       </Content>
       {state.isHeroModalOpen && <HeroModal id={queryID} />}
+      {state.isAddNewHeroModalOpen && <AddNewCharacterForm />}
     </Wrapper>
   );
 };
