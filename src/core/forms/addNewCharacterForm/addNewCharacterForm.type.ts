@@ -10,3 +10,16 @@ export interface IAddNewCharacterForm {
   race: string;
   side: string;
 }
+
+export interface IFormErrors {
+  name: string;
+  gender: string;
+  race: string;
+  side: string;
+  description: string;
+  tags: string;
+  imageURL: string;
+  colorName: string;
+  backgroundColor: string;
+  parametersColor: string;
+}

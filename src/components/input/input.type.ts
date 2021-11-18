@@ -1,6 +1,3 @@
+import React from 'react';
 
-export interface IInput {
-  placeholder: string;
-  value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-}
+export interface IInput extends React.HTMLProps<HTMLInputElement> {}

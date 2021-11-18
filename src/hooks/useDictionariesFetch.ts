@@ -11,9 +11,7 @@ export interface IDictionaries {
 export const useDictionariesFetch = (): IDictionaries => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  // const [genderDictionary, setGenderDictionary] = useState<ISelectDictionaryItem[]>([])
-  // const [raceDictionary, setRaceDictionary] = useState<ISelectDictionaryItem[]>([])
-  // const [sideDictionary, setSideDictionary] = useState<ISelectDictionaryItem[]>([])
+
   const dispatch = useAppDispatch();
   const fetchDictionaries = async (): Promise<void> => {
     try {

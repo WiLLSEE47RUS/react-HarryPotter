@@ -28,9 +28,8 @@ import { useAppDispatch, useAppSelector } from '../../../store/store';
 import closeIcon from '../../../assets/icon_close.png';
 import { AddNewCharacterPreview } from '../../components/addNewCharacterPreview/addNewCharacterPreview';
 import { Formik } from 'formik';
-import { validate } from '../../../utils/validateForm/validateForm';
 import API from '../../../services/characters.service';
-import { IAddNewCharacterForm } from './addNewCharacterForm.type';
+import { IAddNewCharacterForm, IFormErrors } from './addNewCharacterForm.type';
 import { mapHeroToIHeroType } from '../../factory/mapHeroToCreature';
 
 export const AddNewCharacterForm: FC = () => {
@@ -67,6 +66,44 @@ export const AddNewCharacterForm: FC = () => {
     race: '',
     side: '',
   };
+
+
+  function validate(values: IAddNewCharacterForm): Partial<IFormErrors> {
+    const errors: Partial<IFormErrors> = {};
+    if (!values.name) {
+      errors.name = 'Введите имя';
+    }
+
+    if (!values.gender) {
+      errors.gender = 'Введите пол';
+    }
+
+    if (!values.race) {
+      errors.race = 'Введите расу';
+    }
+
+    if (!values.side) {
+      errors.side = 'Введите сторону';
+    }
+
+    if (!values.description) {
+      errors.description = 'Введите описание';
+    } else if (values.description.length > 100) {
+      errors.description = 'Максимальная длина - 100 символов';
+    }
+    const maxTagsCount = 3;
+    if (!values.tags) {
+      errors.tags = 'Введите теги';
+    } else if (values.tags.split(', ').length > maxTagsCount) {
+      errors.tags = 'Максимум 3 тега';
+    }
+
+    if (!values.imageURL) {
+      errors.imageURL = 'Загрузите аватар';
+    }
+
+    return errors;
+  }
 
   return (
     <Wrapper onClick={closeForm}>
