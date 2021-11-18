@@ -5,14 +5,12 @@ import { ISelectProps } from './select.type';
 
 export const Select: FC<ISelectProps> = (props) => {
   const [isDropped, setIsDropped] = useState(false);
-  const [checkedCount, setCheckedCount] = useState(props.options.filter((el) => el.checked === true).length);
-
+  const count: string = props.countChecked ? `: ${props.countChecked}` : '';
+  
   return (
     <Wrapper>
-      <Content onClick={(): void => setIsDropped(!isDropped)}>
-        {props.title + (checkedCount ? `: ${checkedCount}` : '')}
-      </Content>
-      {isDropped && <DropDown options={props.options} filterName={props.title} handler={props.setSelectFilters} />}
+      <Content onClick={(): void => setIsDropped(!isDropped)}>{props.title + count}</Content>
+      {isDropped && <DropDown dictionary={props.dictionary} handleSelect = {props.handleSelect} title = {props.title} />}
     </Wrapper>
   );
 };

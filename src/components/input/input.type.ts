@@ -1,7 +1,3 @@
-import { ChangeEventHandler } from 'react';
+import React from 'react';
 
-export interface IInput {
-  placeholder: string;
-  value: string;
-  handler: ChangeEventHandler;
-}
+export interface IInput extends React.HTMLProps<HTMLInputElement> {}

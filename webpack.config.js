@@ -23,7 +23,7 @@ module.exports = {
         new ESLintPlugin(),
     ],
     devServer: {
-        historyApiFallback: true,
+        historyApiFallback: true
     },
     module: {
         rules: [

@@ -28,7 +28,17 @@ module.exports = {
     sourceType: 'module',
   },
   // здесь мы подключаем плагины
-  plugins: ['react', 'react-hooks', 'import', 'promise', 'optimize-regex', 'sonarjs', '@typescript-eslint', 'prettier', 'styled-components-a11y'],
+  plugins: [
+    'react',
+    'react-hooks',
+    'import',
+    'promise',
+    'optimize-regex',
+    'sonarjs',
+    '@typescript-eslint',
+    'prettier',
+    'styled-components-a11y',
+  ],
   // Здесь переопределяются правила плагинов
   rules: {
     curly: 'error',
@@ -50,9 +60,10 @@ module.exports = {
         ignoreEnums: true,
         enforceConst: true,
         ignoreReadonlyClassProperties: true,
-        ignore: [0, 1, 2, 12, 24, 60, 100, 1000, 2000, 10000],
+        ignore: [0, 1, 2, 3, 4, 5, 12, 24, 60, 100, 1000, 2000, 10000],
       },
     ],
+
     '@typescript-eslint/naming-convention': [
       'error',
       {
@@ -89,6 +100,23 @@ module.exports = {
       {
         selector: 'typeLike',
         format: ['PascalCase'],
+      },
+    ],
+
+    'jsx-a11y/label-has-associated-control': [
+      'error',
+      {
+        required: {
+          some: ['nesting', 'id'],
+        },
+      },
+    ],
+    'jsx-a11y/label-has-for': [
+      'error',
+      {
+        required: {
+          some: ['nesting', 'id'],
+        },
       },
     ],
     'react/no-access-state-in-setstate': 'error',
